@@ -46,6 +46,7 @@ try:
     if smtp_server == "smtp.gmail.com":
             server.starttls()
     server.login(SrcEmail,SrcMdp)
+    
     for i in range(0,Nbr_Mails):
         server.sendmail(SrcEmail,DestEmail,msg.as_string())
         i +=1
@@ -53,11 +54,14 @@ try:
     sys.stdout.flush()
     server.quit()
     print ('\n [+] Envoie terminé')
+    
     logging.basicConfig(filename='log.log', encoding='utf-8', level=logging.DEBUG)
     logging.info(msg)
+    
 except KeyboardInterrupt:
     print ('[-] Annulé')
     sys.exit()
+   
 except smtplib.SMTPAuthenticationError:
     print ('\n[!] Email ou mot de passe incorrect')
     sys.exit()
